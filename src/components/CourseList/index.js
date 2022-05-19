@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import addCourseAction from "../../store/actions";
 
 export default function CourseList() {
   const courses = useSelector(state=> state.data);
   const dispatch = useDispatch();
+  const [newCourse, setNewCourse] = useState('');
 
   function addCourse(){
-    dispatch(addCourseAction('Redux'))
+    dispatch(addCourseAction(newCourse))
   }
 
   return(
@@ -19,6 +20,11 @@ export default function CourseList() {
           ))
         }
       </ul>
+      <input
+        onChange={course=>(
+          setNewCourse(course.target.value)
+        )}
+      />
       <button type="button" onClick={addCourse}>Adicionar Curso</button>
     </div>
   );
